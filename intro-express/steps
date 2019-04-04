@@ -1,0 +1,16 @@
+// deve indicar onde estão os arquivos de html, em qual pasta
+
+ server.set('views', __dirname + '/views');
+
+ *******
+
+// informa que o motor de renderizacao das views é o EJS
+server.set('view engine', 'ejs');
+
+// mover o index para a pasta das views
+// renomear para a extensao padrao 
+
+
+*******
+// install body parser
+npm install body-parser --save

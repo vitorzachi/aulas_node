@@ -1,0 +1,5 @@
+criar pasta calculadora-express
+
+dentro da pasta, rodar o comando
+npm init
+npm install express --save
