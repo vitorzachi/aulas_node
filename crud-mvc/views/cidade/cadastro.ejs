@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cadastro de cidade</title>
+</head>
+<body>
+    <h1>Cadastro de cidade
+    </h1>
+
+    <form method="POST" action="/cidade/salvar">
+
+        <input name="nome" placeholder="Nome" required>
+        <select name="uf" required>
+            <% ufs.forEach((uf)=>{ %>
+                <option value="<%= uf.id %>"><%= uf.nomeComSigla() %></option>
+            <% }) %>
+        </select>
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>
