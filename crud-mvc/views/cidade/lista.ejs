@@ -8,6 +8,23 @@
 </head>
 <body>
     <h1>Lista de cidades</h1>
-<%= JSON.stringify(list) %>
+    <table>
+        <thead>
+            <tr>
+                <td align="center">Id</td>
+                <td align="center">Nome</td>
+                <td align="center">UF</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% list.forEach((cidade) => { %>
+                <tr>
+                    <td><%= cidade.id %></td>
+                    <td><%= cidade.nome %></td>
+                    <td><%= cidade.uf.nomeComSigla() %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
 </body>
 </html>
