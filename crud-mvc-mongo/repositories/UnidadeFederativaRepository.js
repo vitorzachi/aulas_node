@@ -1,4 +1,5 @@
 const db = require("./ConnectionDB");
+const UnidadeFederativa = require("../models/UnidadeFederativa");
 
 const salvar = function(uf, callback) {
   db.getDB()
@@ -23,12 +24,19 @@ const listar = function(callback) {
     });
 };
 
-const getTodosRegistros = function() {
-  return db
+const getTodosRegistros = async function() {
+  let ret = [];
+  const ufs = await db
     .getDB()
     .collection("UnidadeFederativa")
     .find()
     .toArray();
+
+  ufs.forEach(u => {
+    ret.push(new UnidadeFederativa(u.id, u.nome, u.sigla));
+  });
+
+  return ret;
 };
 module.exports = {
   salvar: salvar,
