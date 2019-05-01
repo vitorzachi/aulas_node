@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lista de cidades</title>
+</head>
+<body>
+    <h1>Lista de cidades</h1>
+    <table>
+        <thead>
+            <tr>
+                <td align="center">Id</td>
+                <td align="center">Nome</td>
+                <td align="center">UF</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% list.forEach((cidade) => { %>
+                <tr>
+                    <td><%= cidade.id %></td>
+                    <td><%= cidade.nome %></td>
+                    <td><%= cidade.uf.nomeComSigla() %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

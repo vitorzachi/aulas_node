@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lista de UFs</title>
+</head>
+<body>
+    <h1>Lista de UFs</h1>
+    <table>
+        <thead>
+            <tr>
+                <td align="center">Id</td>
+                <td align="center">Nome</td>
+                <td align="center">Sigla</td>
+            </tr>
+        </thead>
+        <tbody>
+            <% list.forEach((uf) => { %>
+                <tr>
+                    <td><%= uf.id %></td>
+                    <td><%= uf.nome %></td>
+                    <td><%= uf.sigla %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>
