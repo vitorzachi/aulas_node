@@ -1,7 +1,7 @@
 const db = require("./ConnectionDB");
 const UnidadeFederativa = require("../models/UnidadeFederativa");
 
-const salvar = function(uf, callback) {
+const salvar = function (uf, callback) {
   db.getDB()
     .collection("UnidadeFederativa")
     .insertOne(uf, (err, result) => {
@@ -13,7 +13,7 @@ const salvar = function(uf, callback) {
     });
 };
 
-const listar = function(callback) {
+const listar = function (callback) {
   db.getDB()
     .collection("UnidadeFederativa")
     .find()
@@ -24,7 +24,7 @@ const listar = function(callback) {
     });
 };
 
-const getTodosRegistros = async function() {
+const getTodosRegistros = async function () {
   let ret = [];
   const ufs = await db
     .getDB()
@@ -38,8 +38,25 @@ const getTodosRegistros = async function() {
 
   return ret;
 };
+
+const ufById = async _id => {
+  let ret = [];
+  const ufs = await db
+    .getDB()
+    .collection("UnidadeFederativa")
+    .find({ id: parseInt(_id) })
+    .toArray();
+
+  ufs.forEach(u => {
+    ret.push(new UnidadeFederativa(u.id, u.nome, u.sigla));
+  });
+
+  return ret;
+};
+
 module.exports = {
   salvar: salvar,
   listar: listar,
-  getTodosRegistros: getTodosRegistros
+  getTodosRegistros: getTodosRegistros,
+  ufById: ufById
 };
