@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Lista de veículos</title>
+</head>
+
+<body>
+
+    <form action="/veiculo/salvar" method="POST">
+        <input placeholder="placa" name="placa" required maxlength="10">
+        <input placeholder="proprietário" name="proprietario" maxlength="100" required>
+
+        <select name="marca" id="marca" required> </select>
+
+        <select name="modelo" id="modelo" required> </select>
+
+        <select name="ano" id="ano" required> </select>
+
+        <button type="submit">Salvar</button>
+    </form>
+
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <script type="text/javascript">
+
+        $.get('http://fipeapi.appspot.com/api/1/carros/marcas.json', function (json) {
+            const $marca = $('#marca');
+            json.forEach((marca) => {
+                $marca.append(`<option value='${marca.id}'>${marca.fipe_name}</option>`);
+            })
+
+            $marca.change();
+        })
+
+        $('#marca').change(function () {
+            const marcaSelecionada = $(this).val();
+            const $modelo = $('#modelo');
+            $modelo.empty();
+            $.get(`http://fipeapi.appspot.com/api/1/carros/veiculos/${marcaSelecionada}.json`, function (json) {
+                json.forEach((modelo) => {
+                    $modelo.append(`<option value='${modelo.id}'>${modelo.fipe_name}</option>`);
+                })
+                $modelo.change();
+            })
+
+        })
+
+        $('#modelo').change(function () {
+            const marcaSelecionada = $('#marca').val();
+            const modeloSelecionado = $(this).val();
+            const $ano = $('#ano');
+            $ano.empty();
+            $.get(`http://fipeapi.appspot.com/api/1/carros/veiculo/${marcaSelecionada}/${modeloSelecionado}.json`, function (json) {
+                json.forEach((ano) => {
+                    $ano.append(`<option value='${ano.id}'>${ano.name}</option>`);
+                })
+            })
+        })
+
+
+    </script>
+</body>
+
+</html>
