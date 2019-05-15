@@ -1,8 +1,8 @@
-const db = require("./ConexaoBD");
-const Veiculo = require("../models/Veiculo");
+import { getDB } from "./ConexaoBD";
+import Veiculo from "../models/Veiculo";
 
 const salvar = function (veiculo, callback) {
-  db.getDB()
+  getDB()
     .collection("Veiculos")
     .insertOne(veiculo, (err, result) => {
       if (err) throw err;
@@ -14,7 +14,7 @@ const salvar = function (veiculo, callback) {
 };
 
 const listar = function (callback) {
-  db.getDB()
+  getDB()
     .collection("Veiculos")
     .find()
     .toArray((err, results) => {
@@ -26,22 +26,19 @@ const listar = function (callback) {
 
 const getTodosRegistros = async function () {
   let ret = [];
-  const v = await db
-    .getDB()
+  const v = await getDB()
     .collection("Veiculos")
     .find()
     .toArray();
 
   v.forEach(u => {
-    ret.push(new Veiculos(u.id, u.nome, u.sigla));
+    ret.push(new Veiculo(u.id, u.placa, u.proprietario, u.marca, u.modelo, u.ano));
   });
 
   return ret;
 };
 
 
-module.exports = {
-  salvar: salvar,
-  listar: listar,
-  getTodosRegistros: getTodosRegistros
-};
+export const salvar = salvar;
+export const listar = listar;
+export const getTodosRegistros = getTodosRegistros;
