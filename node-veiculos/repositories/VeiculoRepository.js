@@ -2,7 +2,7 @@ const db = require("./ConexaoBD");
 const Veiculo = require("../models/Veiculo");
 
 const salvar = function (veiculo, callback) {
-  getDB()
+  db.getDB()
     .collection("Veiculos")
     .insertOne(veiculo, (err, result) => {
       if (err) throw err;
@@ -14,7 +14,7 @@ const salvar = function (veiculo, callback) {
 };
 
 const listar = function (callback) {
-  getDB()
+  db.getDB()
     .collection("Veiculos")
     .find()
     .toArray((err, results) => {
@@ -26,7 +26,7 @@ const listar = function (callback) {
 
 const getTodosRegistros = async function () {
   let ret = [];
-  const v = await getDB()
+  const v = await db.getDB()
     .collection("Veiculos")
     .find()
     .toArray();
