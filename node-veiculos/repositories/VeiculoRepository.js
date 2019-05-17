@@ -1,5 +1,5 @@
-import { getDB } from "./ConexaoBD";
-import Veiculo from "../models/Veiculo";
+const db = require("./ConexaoBD");
+const Veiculo = require("../models/Veiculo");
 
 const salvar = function (veiculo, callback) {
   getDB()
@@ -38,7 +38,8 @@ const getTodosRegistros = async function () {
   return ret;
 };
 
-
-export const salvar = salvar;
-export const listar = listar;
-export const getTodosRegistros = getTodosRegistros;
+module.exports = {
+  salvar: salvar,
+  listar: listar,
+  getTodosRegistros: getTodosRegistros
+};
